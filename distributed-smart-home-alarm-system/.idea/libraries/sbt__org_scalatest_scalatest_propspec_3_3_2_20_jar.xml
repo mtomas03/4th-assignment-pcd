@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="sbt: org.scalatest:scalatest-propspec_3:3.2.20:jar" type="java-imported" external-system-id="SBT">
+    <properties groupId="org.scalatest" artifactId="scalatest-propspec_3" version="3.2.20" baseVersion="3.2.20" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/org/scalatest/scalatest-propspec_3/3.2.20/scalatest-propspec_3-3.2.20.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/org/scalatest/scalatest-propspec_3/3.2.20/scalatest-propspec_3-3.2.20-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
