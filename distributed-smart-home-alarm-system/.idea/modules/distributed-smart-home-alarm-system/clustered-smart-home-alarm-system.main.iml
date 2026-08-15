@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="root:main [file:///E:/4th-assignment-pcd/distributed-smart-home-alarm-system/]" external.linked.project.path="E:\4th-assignment-pcd\distributed-smart-home-alarm-system" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="SBT" external.system.module.type="sbtSourceSet" type="JAVA_MODULE" version="4">
+  <component name="DisplayModuleName">
+    <option name="name" value="clustered-smart-home-alarm-system.main" />
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_21">
+    <output url="file://$MODULE_DIR$/../../../target/scala-3.8.4/classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../src/main">
+      <sourceFolder url="file://$MODULE_DIR$/../../../src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../src/main/scala" isTestSource="false" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../target/scala-3.8.4/resource_managed/main" />
+    <content url="file://$MODULE_DIR$/../../../target/scala-3.8.4/src_managed/main" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="sbt: scala-sdk-3.8.4" level="project" />
+    <orderEntry type="library" name="sbt: org.scala-lang:scala3-library_3:3.8.4:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.pekko:pekko-actor-typed_3:1.6.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.pekko:pekko-cluster-typed_3:1.6.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.pekko:pekko-serialization-jackson_3:1.6.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.pekko:pekko-slf4j_3:1.6.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: ch.qos.logback:logback-classic:1.6.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.scala-lang:scala-library:3.8.4:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.pekko:pekko-actor_3:1.6.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.slf4j:slf4j-api:2.0.18:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.pekko:pekko-cluster_3:1.6.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.pekko:pekko-cluster-tools_3:1.6.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.pekko:pekko-distributed-data_3:1.6.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.core:jackson-core:2.21.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.core:jackson-annotations:2.21:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.core:jackson-databind:2.21.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.21.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.21.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.module:jackson-module-parameter-names:2.21.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.dataformat:jackson-dataformat-cbor:2.21.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.fasterxml.jackson.module:jackson-module-scala_3:2.21.2:jar" level="project" />
+    <orderEntry type="library" name="sbt: at.yawk.lz4:lz4-java:1.10.4:jar" level="project" />
+    <orderEntry type="library" name="sbt: ch.qos.logback:logback-core:1.6.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.typesafe:config:1.4.6:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.pekko:pekko-remote_3:1.6.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.pekko:pekko-coordination_3:1.6.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.lmdbjava:lmdbjava:0.9.1:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.thoughtworks.paranamer:paranamer:2.8.3:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.pekko:pekko-stream_3:1.6.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.pekko:pekko-pki_3:1.6.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.agrona:agrona:1.22.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.github.jnr:jnr-constants:0.10.4:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.github.jnr:jnr-ffi:2.2.17:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.apache.pekko:pekko-protobuf-v3_3:1.6.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.reactivestreams:reactive-streams:1.0.4:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.typesafe:ssl-config-core_3:0.7.1:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.hierynomus:asn-one:0.6.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.github.jnr:jffi:1.3.13:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.github.jnr:jffi:1.3.13:native:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.ow2.asm:asm:9.7.1:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.ow2.asm:asm-commons:9.7.1:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.ow2.asm:asm-analysis:9.7.1:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.ow2.asm:asm-tree:9.7.1:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.ow2.asm:asm-util:9.7.1:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.github.jnr:jnr-a64asm:1.0.0:jar" level="project" />
+    <orderEntry type="library" name="sbt: com.github.jnr:jnr-x86asm:1.0.2:jar" level="project" />
+  </component>
+</module>

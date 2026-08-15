@@ -2,6 +2,7 @@ package pcd.alarm.system.actors
 
 import org.apache.pekko.actor.typed.*
 import org.apache.pekko.actor.typed.scaladsl.*
+import pcd.alarm.system.domain.CborSerializable
 
 /**
  * SirenActor represents the siren device.
@@ -20,7 +21,7 @@ object SirenActor {
       }
     }
 
-  sealed trait Command
+  sealed trait Command extends CborSerializable
 
   case object Activate extends Command
 

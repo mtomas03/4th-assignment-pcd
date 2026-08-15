@@ -7,11 +7,11 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="E:\3rd-assignment-pcd\smart-home-alarm-system" />
-            <option value="E:\3rd-assignment-pcd\smart-home-alarm-system\project" />
+            <option value="E:\4th-assignment-pcd\distributed-smart-home-alarm-system" />
+            <option value="E:\4th-assignment-pcd\distributed-smart-home-alarm-system\project" />
           </set>
         </option>
-        <option name="sbtVersion" value="2.0.4" />
+        <option name="sbtVersion" value="1.10.11" />
       </SbtProjectSettings>
     </option>
   </component>

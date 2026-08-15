@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="sbt: com.github.jnr:jnr-constants:0.10.4:jar" type="java-imported" external-system-id="SBT">
+    <properties groupId="com.github.jnr" artifactId="jnr-constants" version="0.10.4" baseVersion="0.10.4" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/com/github/jnr/jnr-constants/0.10.4/jnr-constants-0.10.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/AppData/Local/Coursier/cache/v1/https/repo1.maven.org/maven2/com/github/jnr/jnr-constants/0.10.4/jnr-constants-0.10.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

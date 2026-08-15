@@ -1,6 +1,7 @@
 package pcd.alarm.system.actors
 
 import org.apache.pekko.actor.typed.*
+import org.apache.pekko.actor.typed.receptionist.{Receptionist, ServiceKey}
 import org.apache.pekko.actor.typed.scaladsl.*
 import pcd.alarm.system.*
 import pcd.alarm.system.actors.SirenActor
@@ -12,9 +13,27 @@ import pcd.alarm.system.domain.ArmingMode.{FullArm, PartialArm}
  */
 object ControlUnitActor {
 
-  def apply(config: SystemConfig, siren: ActorRef[SirenActor.Command]): Behavior[Command] =
-    Behaviors.withTimers { timers =>
-      disarmed(config, siren, timers)
+  val ControlUnitKey: ServiceKey[Command] = ServiceKey[Command]("alarm-control-unit")
+
+  def apply(
+             config: SystemConfig,
+             siren: ActorRef[SirenActor.Command],
+             startInRecovery: Boolean = false,
+             simulateCrashAfter: Option[scala.concurrent.duration.FiniteDuration] = None
+           ): Behavior[Command] =
+    Behaviors.setup { ctx =>
+      ctx.system.receptionist ! Receptionist.Register(ControlUnitKey, ctx.self)
+      simulateCrashAfter.foreach(delay => ctx.scheduleOnce(delay, ctx.self, SimulateCrash))
+      Behaviors.withTimers { timers =>
+        if (startInRecovery) {
+          ctx.log.warn("[RECOVERY] Control unit restarted - entering SAFE RECOVERY state. " +
+            "State prior to the restart is considered unknown.")
+          safeRecovery(config, siren, timers)
+        } else {
+          ctx.log.info("[STARTUP] Control unit starting fresh - entering DISARMED state")
+          disarmed(config, siren, timers)
+        }
+      }
     }
 
   /**
@@ -22,6 +41,45 @@ object ControlUnitActor {
    */
   private def inActiveZone(zone: Zone, activeZones: Option[Set[Zone]]): Boolean =
     activeZones.forall(_.contains(zone))
+
+  /**
+   * Fail-safe state entered whenever the control unit starts or restarts after a potential crash.
+   * Because the previous in-memory state cannot be trusted to have survived the failure,
+   * the system deliberately avoids assuming it is either armed or disarmed.
+   */
+  private def safeRecovery(
+                            config: SystemConfig,
+                            siren: ActorRef[SirenActor.Command],
+                            timers: TimerScheduler[Command]
+                          ): Behavior[Command] =
+    Behaviors.receive { (ctx, msg) =>
+      msg match {
+        case PinEntered(pin) if pin == config.pin =>
+          ctx.log.info("[SAFE RECOVERY] Correct PIN - leaving recovery mode, system is now DISARMED")
+          disarmed(config, siren, timers)
+
+        case PinEntered(_) =>
+          ctx.log.warn("[SAFE RECOVERY] Wrong PIN - system remains in SAFE RECOVERY")
+          Behaviors.same
+
+        case GetState(replyTo) =>
+          replyTo ! AlarmState.SafeRecovery
+          Behaviors.same
+
+        case ArmRequest(_, _) =>
+          ctx.log.warn("[SAFE RECOVERY] Arm request ignored - a correct PIN is required first")
+          Behaviors.same
+
+        case SensorEvent(id, zone) =>
+          ctx.log.warn("[SAFE RECOVERY] Sensor {}/{} fired - ignored while recovering", id, zone)
+          Behaviors.same
+
+        case SimulateCrash =>
+          throw new IllegalStateException("Simulated crash requested while in SAFE RECOVERY")
+
+        case _ => Behaviors.unhandled
+      }
+    }
 
   private def disarmed(
                         config: SystemConfig,
@@ -51,6 +109,13 @@ object ControlUnitActor {
         case SensorEvent(id, zone) =>
           ctx.log.debug("[DISARMED] Sensor {}/{} fired - ignored while disarmed", id, zone)
           Behaviors.same
+
+        case GetState(replyTo) =>
+          replyTo ! AlarmState.Disarmed
+          Behaviors.same
+
+        case SimulateCrash =>
+          throw new IllegalStateException("Simulated crash requested while DISARMED")
 
         case _ => Behaviors.unhandled
       }
@@ -82,6 +147,13 @@ object ControlUnitActor {
           ctx.log.debug("[EXIT DELAY] Sensor {}/{} - ignored during exit window", id, zone)
           Behaviors.same
 
+        case GetState(replyTo) =>
+          replyTo ! AlarmState.ExitDelay
+          Behaviors.same
+
+        case SimulateCrash =>
+          throw new IllegalStateException("Simulated crash requested during EXIT DELAY")
+
         case _ => Behaviors.unhandled
       }
     }
@@ -112,6 +184,17 @@ object ControlUnitActor {
         case PinEntered(_) =>
           ctx.log.info("[ARMED] Wrong PIN")
           Behaviors.same
+
+        case GetState(replyTo) =>
+          replyTo ! AlarmState.Armed(activeZones)
+          Behaviors.same
+
+        case ArmRequest(_, _) =>
+          ctx.log.debug("[ARMED] Already armed - ignoring arm request")
+          Behaviors.same
+
+        case SimulateCrash =>
+          throw new IllegalStateException("Simulated crash requested while ARMED")
 
         case _ => Behaviors.unhandled
       }
@@ -147,6 +230,13 @@ object ControlUnitActor {
           ctx.log.debug("[ENTRY DELAY] Sensor {}/{} in inactive zone - ignored", id, zone)
           Behaviors.same
 
+        case GetState(replyTo) =>
+          replyTo ! AlarmState.EntryDelay
+          Behaviors.same
+
+        case SimulateCrash =>
+          throw new IllegalStateException("Simulated crash requested during ENTRY DELAY")
+
         case _ => Behaviors.unhandled
       }
     }
@@ -171,17 +261,28 @@ object ControlUnitActor {
           ctx.log.debug("[ALARM] Sensor event during alarm - already triggered")
           Behaviors.same
 
+        case GetState(replyTo) =>
+          replyTo ! AlarmState.Alarm
+          Behaviors.same
+
+        case SimulateCrash =>
+          throw new IllegalStateException("Simulated crash requested while ALARM was sounding")
+
         case _ => Behaviors.unhandled
       }
     }
 
-  sealed trait Command
+  sealed trait Command extends CborSerializable
 
   final case class ArmRequest(pin: Pin, mode: ArmingMode) extends Command
 
   final case class PinEntered(pin: Pin) extends Command
 
   final case class SensorEvent(sensorId: SensorId, zone: Zone) extends Command
+
+  final case class GetState(replyTo: ActorRef[AlarmState]) extends Command
+
+  case object SimulateCrash extends Command
 
   private[system] case object ExitDelayTimeout extends Command
 

@@ -1,0 +1,45 @@
+networks:
+  alarm-cluster-net:
+    driver: bridge
+
+services:
+  control-unit-node:
+    build: .
+    image: smart-home-alarm-node:latest
+    hostname: control-unit-node
+    networks: [ alarm-cluster-net ]
+    environment:
+      NODE_HOST: control-unit-node
+      NODE_PORT: "2551"
+      NODE_ROLE: control-unit
+      SEED_HOST: control-unit-node
+      SEED_PORT: "2551"
+    command: [ "control-unit" ]
+    ports:
+      - "2551:2551"
+
+  keypad-node:
+    image: smart-home-alarm-node:latest
+    depends_on: [ control-unit-node ]
+    hostname: keypad-node
+    networks: [ alarm-cluster-net ]
+    environment:
+      NODE_HOST: keypad-node
+      NODE_PORT: "2552"
+      NODE_ROLE: keypad
+      SEED_HOST: control-unit-node
+      SEED_PORT: "2551"
+    command: [ "keypad" ]
+
+  sensors-node:
+    image: smart-home-alarm-node:latest
+    depends_on: [ control-unit-node ]
+    hostname: sensors-node
+    networks: [ alarm-cluster-net ]
+    environment:
+      NODE_HOST: sensors-node
+      NODE_PORT: "2553"
+      NODE_ROLE: sensors
+      SEED_HOST: control-unit-node
+      SEED_PORT: "2551"
+    command: [ "sensors" ]

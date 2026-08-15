@@ -2,6 +2,6 @@
 <project version="4">
   <component name="ScalaCompilerConfiguration">
     <option name="separateProdTestSources" value="true" />
-    <profile name="sbt 1" modules="smart-home-alarm-system,smart-home-alarm-system.main,smart-home-alarm-system.test,smart-home-alarm-system_9919,smart-home-alarm-system_9919.main,smart-home-alarm-system_9919.test" />
+    <profile name="sbt 1" modules="clustered-smart-home-alarm-system,clustered-smart-home-alarm-system.main,clustered-smart-home-alarm-system.test,distributed-smart-home-alarm-system_2847,distributed-smart-home-alarm-system_2847.main,distributed-smart-home-alarm-system_2847.test" />
   </component>
 </project>

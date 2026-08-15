@@ -4,7 +4,7 @@ import org.apache.pekko.actor.testkit.typed.scaladsl.ScalaTestWithActorTestKit
 import org.scalatest.wordspec.AnyWordSpecLike
 import pcd.alarm.system.actors.*
 import pcd.alarm.system.domain.ArmingMode.{FullArm, PartialArm}
-import pcd.alarm.system.domain.SystemConfig
+import pcd.alarm.system.domain.{AlarmState, SystemConfig}
 
 import scala.concurrent.duration.*
 
@@ -105,6 +105,67 @@ class ControlUnitActorSpec extends ScalaTestWithActorTestKit with AnyWordSpecLik
       // Correct PIN to deactivate the siren
       acu ! ControlUnitActor.PinEntered("1234")
       sirenProbe.expectMessage(SirenActor.Deactivate)
+    }
+
+    "report its current state through GetState" in {
+      val sirenProbe = createTestProbe[SirenActor.Command]()
+      val stateProbe = createTestProbe[AlarmState]()
+      val acu = spawn(ControlUnitActor(testConfig, sirenProbe.ref))
+
+      acu ! ControlUnitActor.GetState(stateProbe.ref)
+      stateProbe.expectMessage(AlarmState.Disarmed)
+
+      acu ! ControlUnitActor.ArmRequest("1234", FullArm)
+      acu ! ControlUnitActor.GetState(stateProbe.ref)
+      stateProbe.expectMessage(AlarmState.ExitDelay)
+    }
+  }
+
+  "ControlUnitActor started in SAFE RECOVERY mode" should {
+
+    "not assume the system is disarmed or armed, ignoring sensors and arm requests" in {
+      val sirenProbe = createTestProbe[SirenActor.Command]()
+      val stateProbe = createTestProbe[AlarmState]()
+      val acu = spawn(ControlUnitActor(testConfig, sirenProbe.ref, startInRecovery = true))
+
+      acu ! ControlUnitActor.GetState(stateProbe.ref)
+      stateProbe.expectMessage(AlarmState.SafeRecovery)
+
+      // Neither sensor events nor arm requests are able to move the system
+      // out of recovery: only a correct PIN can.
+      acu ! ControlUnitActor.SensorEvent("S1", "zone1")
+      acu ! ControlUnitActor.ArmRequest("1234", FullArm)
+      sirenProbe.expectNoMessage(200.milliseconds)
+
+      acu ! ControlUnitActor.GetState(stateProbe.ref)
+      stateProbe.expectMessage(AlarmState.SafeRecovery)
+    }
+
+    "stay in SAFE RECOVERY when a wrong PIN is entered" in {
+      val sirenProbe = createTestProbe[SirenActor.Command]()
+      val stateProbe = createTestProbe[AlarmState]()
+      val acu = spawn(ControlUnitActor(testConfig, sirenProbe.ref, startInRecovery = true))
+
+      acu ! ControlUnitActor.PinEntered("0000")
+
+      acu ! ControlUnitActor.GetState(stateProbe.ref)
+      stateProbe.expectMessage(AlarmState.SafeRecovery)
+    }
+
+    "return to DISARMED only once the correct PIN is entered" in {
+      val sirenProbe = createTestProbe[SirenActor.Command]()
+      val stateProbe = createTestProbe[AlarmState]()
+      val acu = spawn(ControlUnitActor(testConfig, sirenProbe.ref, startInRecovery = true))
+
+      acu ! ControlUnitActor.PinEntered("1234")
+
+      acu ! ControlUnitActor.GetState(stateProbe.ref)
+      stateProbe.expectMessage(AlarmState.Disarmed)
+
+      // From here on the FSM behaves exactly as a freshly started unit would.
+      acu ! ControlUnitActor.ArmRequest("1234", FullArm)
+      acu ! ControlUnitActor.GetState(stateProbe.ref)
+      stateProbe.expectMessage(AlarmState.ExitDelay)
     }
   }
 }
