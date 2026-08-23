@@ -57,6 +57,27 @@ public class GameImpl extends UnicastRemoteObject implements Game {
     }
 
     /**
+     * Handles a player leaving the match and broadcasts the updated state.
+     *
+     * @param playerName the name of the player leaving
+     * @throws GameException if the player is not part of this match
+     */
+    @Override
+    public void leaveGame(final String playerName) throws GameException {
+        final GameSnapshot newSnapshot = state.leaveGame(playerName);
+        broadcast(newSnapshot);
+    }
+
+    /**
+     * Tells whether this match has ended.
+     *
+     * @return {@code true} if the match is ended/abandoned
+     */
+    public boolean isEnded() {
+        return state.isEnded();
+    }
+
+    /**
      * Retrieves current player callbacks from the state and passes
      * the new snapshot to the asynchronous notification pipeline.
      *

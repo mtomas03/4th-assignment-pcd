@@ -120,11 +120,18 @@ public class GameController extends UnicastRemoteObject implements PlayerCallbac
     }
 
     /**
-     * Releases the network resources owned by this controller and
-     * unexports it from the RMI runtime. Should be called once, when the
-     * client application is shutting down.
+     * Releases the network resources owned by this controller, notifies the server
+     * if the player is currently in a match, and unexports it from the RMI runtime.
+     * Should be called once, when the client application is shutting down.
      */
     public void shutdown() {
+        final Game game = currentGame;
+        final String player = playerName;
+        if (game != null && player != null) {
+            try {
+                game.leaveGame(player);
+            } catch (final Exception ignored) {}
+        }
         networkExecutor.shutdown();
         try {
             UnicastRemoteObject.unexportObject(this, true);

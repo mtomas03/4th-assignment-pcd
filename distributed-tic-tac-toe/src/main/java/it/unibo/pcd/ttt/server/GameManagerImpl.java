@@ -35,13 +35,14 @@ public class GameManagerImpl extends UnicastRemoteObject implements GameManager 
 
     /**
      * Creates a new match with the given name and registers its first player.
+     * If a match with the given name exists but was abandoned or finished, it is replaced.
      *
      * @param gameName   the unique name for the match to create
      * @param playerName the name of the player creating the match
      * @param callback   the remote callback handle for push updates
      * @return the remote {@link Game} reference for the created match
      * @throws RemoteException if an RMI communication failure occurs
-     * @throws GameException   if the game name is invalid, a match with that name already exists,
+     * @throws GameException   if the game name is invalid, an active match with that name exists,
      *                         or the player cannot be added
      */
     @Override
@@ -50,12 +51,28 @@ public class GameManagerImpl extends UnicastRemoteObject implements GameManager 
         if (gameName == null || gameName.isBlank()) {
             throw new GameException("Game name must not be empty.");
         }
+
+        final GameImpl existing = games.get(gameName);
+        if (existing != null) {
+            if (existing.isEnded()) {
+                if (games.remove(gameName, existing)) {
+                    try {
+                        UnicastRemoteObject.unexportObject(existing, true);
+                    } catch (final Exception ignored) {
+                    }
+                }
+            } else {
+                throw new GameException("A match named '" + gameName + "' already exists.");
+            }
+        }
+
         final GameImpl newGame = new GameImpl(gameName);
         final GameImpl previous = games.putIfAbsent(gameName, newGame);
-        if (previous != null) {
+        if (previous != null && !previous.isEnded()) {
             UnicastRemoteObject.unexportObject(newGame, true);
             throw new GameException("A match named '" + gameName + "' already exists.");
         }
+
         try {
             newGame.addPlayer(playerName, callback);
         } catch (final GameException e) {

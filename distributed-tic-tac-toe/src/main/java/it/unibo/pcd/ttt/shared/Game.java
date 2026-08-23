@@ -19,4 +19,13 @@ public interface Game extends Remote {
      * @throws GameException   if the move is against the game rules
      */
     void makeMove(String playerName, int row, int col) throws RemoteException, GameException;
+
+    /**
+     * Signals that {@code playerName} is leaving the match.
+     *
+     * @param playerName the name of the player leaving
+     * @throws RemoteException if the remote call fails
+     * @throws GameException   if the player is not part of this match
+     */
+    void leaveGame(String playerName) throws RemoteException, GameException;
 }

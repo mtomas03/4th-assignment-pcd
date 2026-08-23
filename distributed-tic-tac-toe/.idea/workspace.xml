@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b80e3e30-155c-494c-8136-9987251a4f4e" name="Changes" comment="" />
+    <list default="true" id="b80e3e30-155c-494c-8136-9987251a4f4e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameManagerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameManagerImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/shared/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/shared/Game.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -163,6 +170,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/4th-assignment-pcd/distributed-tic-tac-toe",
     "to.speed.mode.migration.done": "true"
   }
 }]]></component>
@@ -282,10 +290,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ClientMain" />
-        <item itemvalue="Gradle.distributed-tic-tac-toe [run]" />
         <item itemvalue="Gradle.distributed-tic-tac-toe [runClient]" />
         <item itemvalue="Gradle.distributed-tic-tac-toe [runServer]" />
+        <item itemvalue="Application.ClientMain" />
+        <item itemvalue="Gradle.distributed-tic-tac-toe [run]" />
         <item itemvalue="Gradle.distributed-tic-tac-toe [clean]" />
       </list>
     </recent_temporary>
@@ -293,7 +301,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-63390994e64e-intellij.indexing.shared.core-IU-262.8665.258" />
+        <option value="bundled-jdk-30f59d01ecdd-34e2839f716b-intellij.indexing.shared.core-IU-262.9437.185" />
       </set>
     </attachedChunks>
   </component>

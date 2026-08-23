@@ -3,7 +3,7 @@ package it.unibo.pcd.ttt.server;
 import it.unibo.pcd.ttt.shared.*;
 
 /**
- * A {@code GameState} is a monitor representing a single Tic-Tac-Toe match.
+ * A monitor representing a single Tic-Tac-Toe match.
  */
 public class GameState {
 
@@ -31,15 +31,25 @@ public class GameState {
      * @param playerName the display name of the joining player
      * @param callback   the remote callback to notify for state updates
      * @return an updated, immutable {@link GameSnapshot} capturing the new state
-     * @throws GameException if the player name is invalid, already taken, or if the match is full
+     * @throws GameException if the player name is invalid, already taken, or if the match is full/abandoned
      */
     public synchronized GameSnapshot addPlayer(final String playerName, final PlayerCallback callback) throws GameException {
         if (playerName == null || playerName.isBlank()) {
             throw new GameException("Player name must not be empty.");
         }
+        if (status == GameStatus.ABANDONED) {
+            throw new GameException("Match '" + gameName + "' was abandoned.");
+        }
+        if (status == GameStatus.X_WON || status == GameStatus.O_WON || status == GameStatus.DRAW) {
+            throw new GameException("Match '" + gameName + "' has already finished.");
+        }
+        if (status != GameStatus.WAITING_FOR_OPPONENT) {
+            throw new GameException("Match '" + gameName + "' is already full or in progress.");
+        }
         if (playerName.equals(playerXName) || playerName.equals(playerOName)) {
             throw new GameException("Name '" + playerName + "' is already taken in match '" + gameName + "'.");
         }
+
         if (playerXName == null) {
             playerXName = playerName;
             playerXCallback = callback;
@@ -92,6 +102,45 @@ public class GameState {
             turn = mover.opponent();
         }
         return buildSnapshot();
+    }
+
+    /**
+     * Handles a player leaving the match. If the match is in progress, the remaining player
+     * wins by default. If the match is waiting for an opponent, it is marked as abandoned.
+     *
+     * @param playerName the name of the player leaving
+     * @return an updated, immutable {@link GameSnapshot} representing the new state
+     * @throws GameException if the player is not part of this match
+     */
+    public synchronized GameSnapshot leaveGame(final String playerName) throws GameException {
+        final Symbol leavingSymbol = symbolOf(playerName);
+        if (leavingSymbol == null) {
+            throw new GameException("'" + playerName + "' is not a player of match '" + gameName + "'.");
+        }
+
+        if (leavingSymbol == Symbol.X) {
+            playerXCallback = null;
+        } else {
+            playerOCallback = null;
+        }
+
+        if (status == GameStatus.IN_PROGRESS) {
+            status = leavingSymbol == Symbol.X ? GameStatus.O_WON : GameStatus.X_WON;
+            turn = null;
+        } else if (status == GameStatus.WAITING_FOR_OPPONENT) {
+            status = GameStatus.ABANDONED;
+            turn = null;
+        }
+        return buildSnapshot();
+    }
+
+    /**
+     * Tells whether the match has ended (either abandoned or finished).
+     *
+     * @return {@code true} if the match is no longer active
+     */
+    public synchronized boolean isEnded() {
+        return status == GameStatus.ABANDONED || status == GameStatus.X_WON || status == GameStatus.O_WON || status == GameStatus.DRAW;
     }
 
     /**
