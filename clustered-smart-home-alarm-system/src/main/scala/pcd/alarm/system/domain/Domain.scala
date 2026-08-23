@@ -8,8 +8,7 @@ type Zone = String
 type SensorId = String
 
 /**
- * Marker trait identifying domain entities, actor commands, and system states that cross node boundaries.
- * Types extending this trait are mapped to the Jackson CBOR serializer in `application.conf`.
+ * Types extending this marker trait are mapped to the Jackson CBOR serializer.
  */
 trait CborSerializable
 

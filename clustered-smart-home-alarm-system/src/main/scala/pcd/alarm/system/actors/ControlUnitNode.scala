@@ -7,7 +7,7 @@ import pcd.alarm.system.domain.SystemConfig
 import scala.concurrent.duration.FiniteDuration
 
 /**
- * Top-level guardian for a control-unit cluster node, implementing fault tolerance and recovery.
+ * Top-level guardian for a control unit cluster node.
  */
 object ControlUnitNode {
 
@@ -33,8 +33,8 @@ object ControlUnitNode {
 
       Behaviors.receiveSignal[Nothing] {
         case (context, Terminated(deadRef)) =>
-          context.log.error("Control unit [{}] terminated unexpectedly! Silencing siren and " +
-            "restarting into Safe Recovery", deadRef.path.name)
+          context.log.error("Control unit [{}] terminated unexpectedly! " +
+            "Restarting into Safe Recovery", deadRef.path.name)
           siren ! SirenActor.Deactivate
           spawnControlUnit(startInRecovery = true, armCrashTimer = false)
           Behaviors.same

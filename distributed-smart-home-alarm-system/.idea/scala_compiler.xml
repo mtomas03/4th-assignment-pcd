@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ScalaCompilerConfiguration">
-    <option name="separateProdTestSources" value="true" />
-    <profile name="sbt 1" modules="clustered-smart-home-alarm-system,clustered-smart-home-alarm-system.main,clustered-smart-home-alarm-system.test,distributed-smart-home-alarm-system_2847,distributed-smart-home-alarm-system_2847.main,distributed-smart-home-alarm-system_2847.test" />
-  </component>
-</project>

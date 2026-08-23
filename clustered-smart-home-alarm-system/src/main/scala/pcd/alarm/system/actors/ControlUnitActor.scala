@@ -43,7 +43,7 @@ object ControlUnitActor {
     activeZones.forall(_.contains(zone))
 
   /**
-   * Fail-safe state entered whenever the control unit starts or restarts after a potential crash.
+   * State entered whenever the control unit starts or restarts after a potential crash.
    * Because the previous in-memory state cannot be trusted to have survived the failure,
    * the system deliberately avoids assuming it is either armed or disarmed.
    */

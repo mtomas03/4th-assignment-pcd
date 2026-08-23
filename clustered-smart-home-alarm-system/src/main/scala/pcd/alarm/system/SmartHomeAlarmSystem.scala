@@ -9,11 +9,11 @@ import scala.concurrent.Await
 import scala.concurrent.duration.*
 
 /**
- * Entry point for every cluster node. All nodes share the same artefact, which role a given JVM plays
+ * Entry point for every cluster node. All nodes share the same artefact, which role
  * is selected by the first command line argument, while its network identity comes from
  * the environment variables read by `application.conf`.
  *
- * - Demo scenario driven by the "keypad" and "sensors" nodes once the cluster has formed:
+ * - Scenario driven by the keypad and sensors nodes once the cluster has formed:
  *   t= 5s, ArmFull -> ExitDelay starts (20s)
  *   t=10s, DS-FRONT sensor fires -> ignored (still exit delay)
  *   t=26s, MS-UPPER-01 sensor fires -> EntryDelay starts (15s)
@@ -87,8 +87,7 @@ object SmartHomeAlarmSystem {
   }
 
   /**
-   * Utility helper that schedules a sequence of messages on an ActorSystem
-   * to build declarative timeline scripts.
+   * Utility helper that schedules a sequence of messages on an ActorSystem.
    *
    * @tparam T The type of messages handled by the actor system.
    * @param system The target actor system used for message dispatching and timer scheduling.
