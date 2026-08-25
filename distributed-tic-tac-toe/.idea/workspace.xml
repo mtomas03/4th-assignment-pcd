@@ -6,19 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b80e3e30-155c-494c-8136-9987251a4f4e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/ClientMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/ClientMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/model/ClientGameModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/model/ClientGameModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/view/BoardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/view/BoardPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/view/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/view/MainWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/view/StatusBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/view/StatusBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameEventNotifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameEventNotifier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameManagerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameManagerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/shared/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/shared/GameException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/shared/GameException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/shared/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
