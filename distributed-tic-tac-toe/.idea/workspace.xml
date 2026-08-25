@@ -6,11 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="b80e3e30-155c-494c-8136-9987251a4f4e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/ClientMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/ClientMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/model/ClientGameModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/model/ClientGameModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/view/BoardPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/view/BoardPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/view/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/view/MainWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/view/StatusBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/client/view/StatusBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameEventNotifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameEventNotifier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameManagerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameManagerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/shared/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/shared/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/shared/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/shared/GameException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/shared/GameException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/shared/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/unibo/pcd/ttt/server/GameManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,61 +72,61 @@
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="8.702175641504905E-253" />
+      <entry key="S5" value="3.365640018107899E-101" />
+      <entry key="S10" value="1.1559080378894957E-50" />
+      <entry key="S30" value="5.69274951810765E-17" />
+      <entry key="S60" value="1.5088539980067213E-8" />
+      <entry key="M2" value="2.458166029759951E-4" />
+      <entry key="M5" value="0.0849629148192727" />
+      <entry key="M10" value="0.6464772721051487" />
+      <entry key="M15" value="1.3382281242461436" />
+      <entry key="M30" value="2.994118284385004" />
+      <entry key="H1" value="4.918421499796282" />
+      <entry key="H2" value="6.736360105241941" />
+      <entry key="H4" value="8.108719063122866" />
+      <entry key="D1" value="9.638766398866384" />
+      <entry key="W1" value="9.947106698423124" />
+    </decayedCancelled>
+    <decayedSelected>
       <entry key="MS100" value="1.0" />
       <entry key="MS500" value="1.0" />
       <entry key="S2" value="1.0" />
       <entry key="S5" value="1.0" />
       <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0000000000370217" />
-      <entry key="S60" value="1.0000060853615818" />
-      <entry key="M2" value="1.0024971029093201" />
-      <entry key="M5" value="1.1110630489860207" />
-      <entry key="M10" value="1.4974896190502394" />
-      <entry key="M15" value="1.8772093462948316" />
-      <entry key="M30" value="2.716307643567002" />
-      <entry key="H1" value="3.796120451620075" />
-      <entry key="H2" value="4.918582732645219" />
-      <entry key="H4" value="5.791534580290203" />
-      <entry key="D1" value="6.769531380433872" />
-      <entry key="W1" value="6.966273961315931" />
-    </decayedCancelled>
-    <decayedSelected>
-      <entry key="MS100" value="0.0" />
-      <entry key="MS500" value="0.0" />
-      <entry key="S2" value="4.161665065850783E-262" />
-      <entry key="S5" value="2.8035406010847906E-105" />
-      <entry key="S10" value="5.294847118743204E-53" />
-      <entry key="S30" value="3.7553321561210475E-18" />
-      <entry key="S60" value="1.957948315852371E-9" />
-      <entry key="M2" value="5.010270744619702E-5" />
-      <entry key="M5" value="0.030602330444358294" />
-      <entry key="M10" value="0.3122760063942554" />
-      <entry key="M15" value="0.7266808963301616" />
-      <entry key="M30" value="1.8503956846315566" />
-      <entry key="H1" value="3.169532201065815" />
-      <entry key="H2" value="4.2892258982869" />
-      <entry key="H4" value="5.048900425777452" />
-      <entry key="D1" value="5.82568476157063" />
-      <entry key="W1" value="5.974672487347702" />
+      <entry key="S30" value="1.0" />
+      <entry key="S60" value="1.0" />
+      <entry key="M2" value="1.000000003054196" />
+      <entry key="M5" value="1.0006306215092788" />
+      <entry key="M10" value="1.044827627688907" />
+      <entry key="M15" value="1.1992271411250381" />
+      <entry key="M30" value="1.9688732976100656" />
+      <entry key="H1" value="3.2934873987882063" />
+      <entry key="H2" value="4.648627394447715" />
+      <entry key="H4" value="5.6566339821046165" />
+      <entry key="D1" value="6.7476837377936265" />
+      <entry key="W1" value="6.963178384666604" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.07856333590761427" />
-      <entry key="MS500" value="0.6012346244490888" />
-      <entry key="S2" value="0.8805641409613526" />
-      <entry key="S5" value="0.9503955590959275" />
-      <entry key="S10" value="0.9748823308973896" />
-      <entry key="S30" value="0.9915563490919518" />
-      <entry key="S60" value="0.9957752874005312" />
-      <entry key="M2" value="1.000424169906497" />
-      <entry key="M5" value="1.1406227208306563" />
-      <entry key="M10" value="1.8085566497125551" />
-      <entry key="M15" value="2.6024436601563408" />
-      <entry key="M30" value="4.565090513695431" />
-      <entry key="H1" value="6.964246130901514" />
-      <entry key="H2" value="9.206809739010392" />
-      <entry key="H4" value="10.839825317108362" />
-      <entry key="D1" value="12.595094513894962" />
-      <entry key="W1" value="12.940928506345976" />
+      <entry key="MS100" value="2.765829798085446E-4" />
+      <entry key="MS500" value="0.19425181719601237" />
+      <entry key="S2" value="0.6638825791912188" />
+      <entry key="S5" value="0.8488608596121924" />
+      <entry key="S10" value="0.9213364529921696" />
+      <entry key="S30" value="0.9730595473613218" />
+      <entry key="S60" value="0.9864378220801467" />
+      <entry key="M2" value="0.9934403412764489" />
+      <entry key="M5" value="1.0826963536845071" />
+      <entry key="M10" value="1.689250754627268" />
+      <entry key="M15" value="2.535492128452733" />
+      <entry key="M30" value="4.961065401253582" />
+      <entry key="H1" value="8.210230706131817" />
+      <entry key="H2" value="11.383769611392847" />
+      <entry key="H4" value="13.764595928238608" />
+      <entry key="D1" value="16.386296069776503" />
+      <entry key="W1" value="16.910262267755456" />
     </decayedShown>
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
@@ -151,30 +159,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Gradle.distributed-tic-tac-toe [:it.unibo.pcd.ttt.client.ClientMain.main()].executor": "Run",
-    "Gradle.distributed-tic-tac-toe [clean].executor": "Run",
-    "Gradle.distributed-tic-tac-toe [jar].executor": "Run",
-    "Gradle.distributed-tic-tac-toe [runClient].executor": "Run",
-    "Gradle.distributed-tic-tac-toe [runServer].executor": "Run",
-    "Gradle.distributed-tic-tac-toe [run].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "copilot.chat.legacySessionMetadata.migrated": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/4th-assignment-pcd/distributed-tic-tac-toe",
-    "to.speed.mode.migration.done": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Gradle.distributed-tic-tac-toe [:it.unibo.pcd.ttt.client.ClientMain.main()].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.distributed-tic-tac-toe [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.distributed-tic-tac-toe [jar].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.distributed-tic-tac-toe [runClient].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.distributed-tic-tac-toe [runServer].executor&quot;: &quot;Run&quot;,
+    &quot;Gradle.distributed-tic-tac-toe [run].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;copilot.chat.legacySessionMetadata.migrated&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/4th-assignment-pcd/distributed-tic-tac-toe&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Application.ClientMain">
+}</component>
+  <component name="RunManager" selected="Gradle.distributed-tic-tac-toe [runServer]">
     <configuration name="ClientMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.unibo.pcd.ttt.client.ClientMain" />
       <module name="distributed-tic-tac-toe.main" />

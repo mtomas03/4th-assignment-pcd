@@ -3,7 +3,7 @@ package it.unibo.pcd.ttt.client;
 import it.unibo.pcd.ttt.client.controller.GameController;
 import it.unibo.pcd.ttt.client.model.ClientGameModel;
 import it.unibo.pcd.ttt.client.view.MainWindow;
-import it.unibo.pcd.ttt.shared.GameManager;
+import it.unibo.pcd.ttt.server.GameManager;
 
 import javax.swing.*;
 import java.rmi.registry.LocateRegistry;

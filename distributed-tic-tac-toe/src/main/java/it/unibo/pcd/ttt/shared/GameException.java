@@ -7,7 +7,7 @@ package it.unibo.pcd.ttt.shared;
 public class GameException extends Exception {
 
     /**
-     * Creates a new exception with the given explanatory message.
+     * Creates a new Game exception with the given explanatory message.
      *
      * @param message a description of the rule violation
      */

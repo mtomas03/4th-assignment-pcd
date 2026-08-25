@@ -1,4 +1,6 @@
-package it.unibo.pcd.ttt.shared;
+package it.unibo.pcd.ttt.server;
+
+import it.unibo.pcd.ttt.shared.GameException;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

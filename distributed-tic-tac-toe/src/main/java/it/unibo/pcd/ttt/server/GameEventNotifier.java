@@ -53,13 +53,6 @@ public class GameEventNotifier {
     }
 
     /**
-     * Shuts down the background notification thread pool.
-     */
-    public void shutdown() {
-        executor.shutdown();
-    }
-
-    /**
      * Executes a single remote callback invocation safely.
      *
      * <p> Any {@link RemoteException} thrown during delivery is logged, preventing network failure on one
@@ -78,5 +71,32 @@ public class GameEventNotifier {
         } catch (final RemoteException e) {
             LOGGER.log(Level.WARNING, "Failed to notify player " + label + " of match '" + snapshot.gameName() + "'.", e);
         }
+    }
+
+    /**
+     * Delivers the final game state snapshot to player callbacks,
+     * executes an optional clean-up task,
+     * and gracefully shuts down the background notification executor.
+     *
+     * @param snapshot      the final immutable game state snapshot to deliver
+     * @param playerX       the remote callback registered for player X, or {@code null} if unassigned
+     * @param playerO       the remote callback registered for player O, or {@code null} if unassigned
+     * @param cleanupAction an optional {@link Runnable} task executed after snapshot delivery to release match resources, or {@code null}
+     */
+    public void notifyUpdateAndShutdown(final GameSnapshot snapshot,
+                                        final PlayerCallback playerX,
+                                        final PlayerCallback playerO,
+                                        final Runnable cleanupAction) {
+        if (snapshot == null) {
+            return;
+        }
+        executor.execute(() -> {
+            deliver(playerX, snapshot, "X");
+            deliver(playerO, snapshot, "O");
+            if (cleanupAction != null) {
+                cleanupAction.run();
+            }
+            executor.shutdown();
+        });
     }
 }

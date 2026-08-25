@@ -44,7 +44,9 @@ public class BoardPanel extends JPanel implements GameModelListener {
 
     @Override
     public void onModelChanged(final ClientGameModel model) {
-        render(model.getSnapshot(), model.getLocalSymbol());
+        final GameSnapshot snapshot = model.getSnapshot();
+        final Symbol localSymbol = model.getLocalSymbol();
+        SwingUtilities.invokeLater(() -> render(snapshot, localSymbol));
     }
 
     private void render(final GameSnapshot snapshot, final Symbol localSymbol) {

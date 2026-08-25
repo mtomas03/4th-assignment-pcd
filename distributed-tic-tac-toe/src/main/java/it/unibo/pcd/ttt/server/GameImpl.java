@@ -1,6 +1,5 @@
 package it.unibo.pcd.ttt.server;
 
-import it.unibo.pcd.ttt.shared.Game;
 import it.unibo.pcd.ttt.shared.GameException;
 import it.unibo.pcd.ttt.shared.GameSnapshot;
 import it.unibo.pcd.ttt.shared.PlayerCallback;
@@ -13,21 +12,22 @@ import java.rmi.server.UnicastRemoteObject;
  */
 public class GameImpl extends UnicastRemoteObject implements Game {
 
-    private final String gameName;
     private final GameState state;
     private final GameEventNotifier notifier;
+    private final Runnable onEndedCleanup;
 
     /**
      * Creates and exports a new match.
      *
-     * @param gameName the unique name identifying this match
+     * @param gameName       the unique name identifying this match
+     * @param onEndedCleanup action executed to remove this match from the GameManager upon completion
      * @throws RemoteException if exporting the remote object to the RMI runtime fails
      */
-    public GameImpl(final String gameName) throws RemoteException {
+    public GameImpl(final String gameName, final Runnable onEndedCleanup) throws RemoteException {
         super();
-        this.gameName = gameName;
         this.state = new GameState(gameName);
         this.notifier = new GameEventNotifier(gameName);
+        this.onEndedCleanup = onEndedCleanup;
     }
 
     /**
@@ -77,13 +77,18 @@ public class GameImpl extends UnicastRemoteObject implements Game {
         return state.isEnded();
     }
 
-    /**
-     * Retrieves current player callbacks from the state and passes
-     * the new snapshot to the asynchronous notification pipeline.
-     *
-     * @param snapshot the updated game state snapshot to broadcast
-     */
     private void broadcast(final GameSnapshot snapshot) {
-        notifier.notifyUpdate(snapshot, state.getPlayerXCallback(), state.getPlayerOCallback());
+        if (state.isEnded()) {
+            notifier.notifyUpdateAndShutdown(snapshot, state.getPlayerXCallback(), state.getPlayerOCallback(), () -> {
+                if (onEndedCleanup != null) {
+                    onEndedCleanup.run();
+                }
+                try {
+                    UnicastRemoteObject.unexportObject(this, true);
+                } catch (final Exception ignored) {}
+            });
+        } else {
+            notifier.notifyUpdate(snapshot, state.getPlayerXCallback(), state.getPlayerOCallback());
+        }
     }
 }

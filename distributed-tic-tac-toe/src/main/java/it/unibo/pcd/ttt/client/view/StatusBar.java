@@ -25,12 +25,25 @@ public class StatusBar extends JPanel implements GameModelListener {
 
     @Override
     public void onModelChanged(final ClientGameModel model) {
+        final String lastError = model.getLastError();
         final GameSnapshot snapshot = model.getSnapshot();
+        final String localPlayerName = model.getLocalPlayerName();
+        SwingUtilities.invokeLater(() -> updateStatus(lastError, snapshot, localPlayerName));
+    }
+
+    private void updateStatus(final String lastError, final GameSnapshot snapshot, final String localPlayerName) {
+        if (lastError != null && !lastError.isBlank()) {
+            label.setForeground(Color.RED);
+            label.setText("Error: " + lastError);
+            return;
+        }
+
+        label.setForeground(Color.BLACK);
         if (snapshot == null) {
             label.setText(" ");
             return;
         }
-        label.setText(describe(snapshot, model.getLocalPlayerName()));
+        label.setText(describe(snapshot, localPlayerName));
     }
 
     private String describe(final GameSnapshot snapshot, final String localPlayerName) {

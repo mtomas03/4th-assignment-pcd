@@ -1,11 +1,8 @@
 package it.unibo.pcd.ttt.server;
 
-import it.unibo.pcd.ttt.shared.Game;
 import it.unibo.pcd.ttt.shared.GameException;
-import it.unibo.pcd.ttt.shared.GameManager;
 import it.unibo.pcd.ttt.shared.PlayerCallback;
 
-import java.io.Serial;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.concurrent.ConcurrentHashMap;
@@ -55,18 +52,13 @@ public class GameManagerImpl extends UnicastRemoteObject implements GameManager 
         final GameImpl existing = games.get(gameName);
         if (existing != null) {
             if (existing.isEnded()) {
-                if (games.remove(gameName, existing)) {
-                    try {
-                        UnicastRemoteObject.unexportObject(existing, true);
-                    } catch (final Exception ignored) {
-                    }
-                }
+                games.remove(gameName, existing);
             } else {
                 throw new GameException("A match named '" + gameName + "' already exists.");
             }
         }
 
-        final GameImpl newGame = new GameImpl(gameName);
+        final GameImpl newGame = new GameImpl(gameName, () -> games.remove(gameName));
         final GameImpl previous = games.putIfAbsent(gameName, newGame);
         if (previous != null && !previous.isEnded()) {
             UnicastRemoteObject.unexportObject(newGame, true);

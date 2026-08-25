@@ -13,9 +13,9 @@ public class ClientGameModel {
 
     private final List<GameModelListener> listeners = new CopyOnWriteArrayList<>();
 
-    private String localPlayerName;
-    private GameSnapshot snapshot;
-    private String lastError;
+    private volatile String localPlayerName;
+    private volatile GameSnapshot snapshot;
+    private volatile String lastError;
 
     /**
      * Registers a listener to be notified of every state change.
@@ -47,16 +47,17 @@ public class ClientGameModel {
      * @return the latest known snapshot of the active match, or {@code null} if none
      */
     public GameSnapshot getSnapshot() {
-        return snapshot;
+        return this.snapshot;
     }
 
     /**
-     * Sets the current match snapshot.
+     * Sets the current match snapshot and clears any previous error.
      *
      * @param snapshot the new snapshot
      */
     public void setSnapshot(final GameSnapshot snapshot) {
         this.snapshot = snapshot;
+        this.lastError = null;
         fireChanged();
     }
 
@@ -64,7 +65,7 @@ public class ClientGameModel {
      * @return the last error message recorded, or {@code null}
      */
     public String getLastError() {
-        return lastError;
+        return this.lastError;
     }
 
     /**
@@ -82,7 +83,7 @@ public class ClientGameModel {
      * @return the {@link Symbol} owned by the local player in the current match, or {@code null}
      */
     public Symbol getLocalSymbol() {
-        return snapshot == null ? null : snapshot.symbolOf(localPlayerName);
+        return this.snapshot == null ? null : this.snapshot.symbolOf(this.localPlayerName);
     }
 
     private void fireChanged() {

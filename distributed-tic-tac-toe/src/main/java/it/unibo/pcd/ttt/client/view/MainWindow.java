@@ -62,6 +62,7 @@ public class MainWindow extends JFrame implements GameModelListener {
 
     @Override
     public void onModelChanged(final ClientGameModel model) {
-        cardLayout.show(cards, model.getSnapshot() == null ? CARD_LOBBY : CARD_GAME);
+        final boolean showLobby = model.getSnapshot() == null;
+        SwingUtilities.invokeLater(() -> cardLayout.show(cards, showLobby ? CARD_LOBBY : CARD_GAME));
     }
 }

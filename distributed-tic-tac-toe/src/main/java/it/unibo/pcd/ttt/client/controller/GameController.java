@@ -1,6 +1,8 @@
 package it.unibo.pcd.ttt.client.controller;
 
 import it.unibo.pcd.ttt.client.model.ClientGameModel;
+import it.unibo.pcd.ttt.server.Game;
+import it.unibo.pcd.ttt.server.GameManager;
 import it.unibo.pcd.ttt.shared.*;
 
 import javax.swing.*;
@@ -68,7 +70,7 @@ public class GameController extends UnicastRemoteObject implements PlayerCallbac
         networkExecutor.execute(() -> {
             try {
                 this.playerName = playerName;
-                SwingUtilities.invokeLater(() -> model.setLocalPlayerName(playerName));
+                model.setLocalPlayerName(playerName);
                 currentGame = gameManager.createGame(gameName, playerName, this);
                 completeOnEdt(onCompletion, null);
             } catch (final RemoteException | GameException e) {
@@ -90,7 +92,7 @@ public class GameController extends UnicastRemoteObject implements PlayerCallbac
         networkExecutor.execute(() -> {
             try {
                 this.playerName = playerName;
-                SwingUtilities.invokeLater(() -> model.setLocalPlayerName(playerName));
+                model.setLocalPlayerName(playerName);
                 currentGame = gameManager.joinGame(gameName, playerName, this);
                 completeOnEdt(onCompletion, null);
             } catch (final RemoteException | GameException e) {
@@ -114,7 +116,7 @@ public class GameController extends UnicastRemoteObject implements PlayerCallbac
             try {
                 game.makeMove(playerName, row, col);
             } catch (final RemoteException | GameException e) {
-                SwingUtilities.invokeLater(() -> model.setLastError(e.getMessage()));
+                model.setLastError(e.getMessage());
             }
         });
     }
@@ -140,11 +142,22 @@ public class GameController extends UnicastRemoteObject implements PlayerCallbac
         }
     }
 
+    /**
+     * Handles incoming state snapshot updates from the server via RMI.
+     *
+     * @param snapshot the latest immutable snapshot of the match state
+     */
     @Override
     public void onSnapshotUpdate(final GameSnapshot snapshot) {
-        SwingUtilities.invokeLater(() -> model.setSnapshot(snapshot));
+        networkExecutor.execute(() -> model.setSnapshot(snapshot));
     }
 
+    /**
+     * Safely executes a completion callback on the EDT.
+     *
+     * @param onCompletion the callback to invoke, or {@code null} if no completion action is needed
+     * @param errorOrNull  an explanatory error message if the operation failed, or {@code null} on success
+     */
     private void completeOnEdt(final Consumer<String> onCompletion, final String errorOrNull) {
         if (onCompletion != null) {
             SwingUtilities.invokeLater(() -> onCompletion.accept(errorOrNull));
